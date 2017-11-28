@@ -1,6 +1,8 @@
 'use strict';
 require('dotenv').config();
+
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
@@ -46,7 +48,25 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 // A protected endpoint which needs a valid JWT to access it
 app.get('/api/protected', jwtAuth, (req, res) => {
   return res.json({
-    data: 'rosebud'
+    data: [
+      "Bath Blue",
+      "Barkham Blue",
+      "Buxton Blue",
+      "Cheshire Blue",
+      "Devon Blue",
+      "Dorset Blue Vinney",
+      "Dovedale",
+      "Exmoor Blue",
+      "Harbourne Blue",
+      "Lanark Blue",
+      "Lymeswold",
+      "Oxford Blue",
+      "Shropshire Blue",
+      "Stichelton",
+      "Stilton",
+      "Blue Wensleydale",
+      "Yorkshire Blue"
+  ]
   });
 });
 

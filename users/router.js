@@ -57,12 +57,14 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
+
+
   const sizedFields = {
     username: {
       min: 1
     },
     password: {
-      min: 10,
+      min: 3,
       // bcrypt truncates after 72 characters, so let's not give the illusion
       // of security by storing extra (unused) info
       max: 72
@@ -131,6 +133,18 @@ router.post('/', jsonParser, (req, res) => {
         return res.status(err.code).json(err);
       }
       res.status(500).json({code: 500, message: 'Internal server error'});
+    });
+});
+router.put('/:id', jsonParser, (req, res) => {
+  console.log("hello");
+  User.findByIdAndUpdate(req.params.id, {$push: {wishList:req.body.itemId}},
+    function(err){
+      if(err) {
+        console.log(err);
+      }
+      else {
+        res.send('Everything seems to be working');
+      }
     });
 });
 

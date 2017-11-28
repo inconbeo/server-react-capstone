@@ -15,11 +15,17 @@ const UserSchema = mongoose.Schema({
     required: true
   },
   firstName: {type: String, default: ''},
-  lastName: {type: String, default: ''}
+  lastName: {type: String, default: ''},
+  wishList: {
+    unique: false,
+    required: false
+  }
+  
 });
 
 UserSchema.methods.apiRepr = function() {
   return {
+    id: this._id,
     username: this.username || '',
     firstName: this.firstName || '',
     lastName: this.lastName || ''
