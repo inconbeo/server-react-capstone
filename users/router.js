@@ -148,6 +148,23 @@ router.put('/:id', jsonParser, (req, res) => {
     });
 });
 
+
+router.delete('/:id', jsonParser, (req, res) => {
+  console.log("delete");
+  const id = req.params.id;
+  User.findById(req.params.id).then(() => {
+    console.log(req.params.id);
+    
+    res.sendStatus(204);
+  });
+});
+
+// removeItem(e) {
+//   let array = this.state.auth.currentUser.wishList;
+//   let index = array.indexOf(e.target);
+//   array.splice(index, 1);
+// }
+
 // Never expose all your users like below in a prod application
 // we're just doing this so we have a quick way to see
 // if we're creating users. keep in mind, you can also
