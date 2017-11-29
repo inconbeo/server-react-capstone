@@ -99,10 +99,11 @@ router.post('/', jsonParser, (req, res) => {
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
-
+  console.log('test')
   return User.find({username})
     .count()
     .then(count => {
+      console.log('line 106');
       if (count > 0) {
         // There is an existing user with the same username
         return Promise.reject({
@@ -116,6 +117,7 @@ router.post('/', jsonParser, (req, res) => {
       return User.hashPassword(password);
     })
     .then(hash => {
+      console.log('line 120');
       return User.create({
         username,
         password: hash,
@@ -124,14 +126,17 @@ router.post('/', jsonParser, (req, res) => {
       });
     })
     .then(user => {
+      console.log('line 129');
       return res.status(201).json(user.apiRepr());
     })
     .catch(err => {
+      
       // Forward validation errors on to the client, otherwise give a 500
       // error because something unexpected has happened
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
+      console.error(err)
       res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
