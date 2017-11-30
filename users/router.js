@@ -140,6 +140,7 @@ router.post('/', jsonParser, (req, res) => {
       res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
+
 router.put('/:id', jsonParser, (req, res) => {
   console.log("hello");
   User.findByIdAndUpdate(req.params.id, {$push: {wishList:req.body.itemId}},
@@ -153,10 +154,27 @@ router.put('/:id', jsonParser, (req, res) => {
     });
 });
 
-// Never expose all your users like below in a prod application
-// we're just doing this so we have a quick way to see
-// if we're creating users. keep in mind, you can also
-// verify this in the Mongo shell.
+router.put('/remove-item/:id', jsonParser, (req, res) => {
+  console.log("hello");
+  User.findByIdAndUpdate(req.params.id, {$pull: {wishList:req.body.itemId}},
+    function(err){
+      if(err) {
+        console.log(err);
+      }
+      else {
+        res.sendStatus(204);
+      }
+    });
+});
+
+// router.delete('/:id', jsonParser, (req, res) => {
+//   console.log("delete user from database");
+//   const id = req.params.id;
+//   User.findByIdAndRemove(req.params.id).then(() => {
+//     res.sendStatus(204);
+//   });
+// });
+
 router.get('/', (req, res) => {
   return User.find()
     .then(users => res.json(users.map(user => user.apiRepr())))
