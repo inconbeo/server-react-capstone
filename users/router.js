@@ -142,7 +142,7 @@ router.post('/', jsonParser, (req, res) => {
 });
 
 router.put('/:id', jsonParser, (req, res) => {
-  console.log("hello");
+  
   User.findByIdAndUpdate(req.params.id, {$push: {wishList:req.body.itemId}},
     function(err){
       if(err) {
@@ -155,7 +155,7 @@ router.put('/:id', jsonParser, (req, res) => {
 });
 
 router.put('/remove-item/:id', jsonParser, (req, res) => {
-  console.log("hello");
+  console.log(req.body.itemId);
   User.findByIdAndUpdate(req.params.id, {$pull: {wishList:req.body.itemId}},
     function(err){
       if(err) {
