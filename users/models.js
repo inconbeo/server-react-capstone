@@ -28,7 +28,8 @@ UserSchema.methods.apiRepr = function() {
     id: this._id,
     username: this.username || '',
     firstName: this.firstName || '',
-    lastName: this.lastName || ''
+    lastName: this.lastName || '',
+    wishList: this.wishList || ''
   };
 };
 
