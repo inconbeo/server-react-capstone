@@ -16,10 +16,11 @@ const UserSchema = mongoose.Schema({
   },
   firstName: {type: String, default: ''},
   lastName: {type: String, default: ''},
-  wishList: {
+  wishList: [{
+    type: String,
     unique: false,
     required: false
-  }
+  }]
   
 });
 
