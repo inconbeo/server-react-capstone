@@ -20,6 +20,8 @@ describe('Auth endpoints', function () {
   const password = 'examplePass';
   const firstName = 'Example';
   const lastName = 'User';
+  const id = '5a2a279ee62ef80d4d755b87';
+  const wishList = [];
 
   before(function () {
     return runServer();
