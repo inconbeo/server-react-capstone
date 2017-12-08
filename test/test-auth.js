@@ -109,9 +109,11 @@ describe('Auth endpoints', function () {
             algorithm: ['HS256']
           });
           expect(payload.user).to.deep.equal({
+            id,
             username,
             firstName,
-            lastName
+            lastName,
+            wishList
           });
         });
     });
